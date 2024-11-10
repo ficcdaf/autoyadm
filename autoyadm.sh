@@ -8,7 +8,7 @@
 AYE="AutoYADM Error:"
 AYM="AutoYADM:"
 # We get the absolute path to the script's parent directory.
-AUTOYADMDIR="script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+AUTOYADMDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # We check not to overwrite the user's env setting
 if [ -z "$AUTOYADMPUSH" ]; then
@@ -34,7 +34,7 @@ fi
     yadm add "$path"
   # If neither file nor dir, something is very wrong!
   else
-    echo "$AYE Target must be a directory or a file!"
+    echo "$AYE Target $path must be a directory or a file!"
     exit 1
   fi
 done) <"$AUTOYADMDIR/tracked"

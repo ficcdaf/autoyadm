@@ -5,7 +5,7 @@
 # file, for use by autoyadm.sh
 
 # We get the absolute path to the script's parent directory.
-AUTOYADMDIR="script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+AUTOYADMDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 AYE="AutoYADM Error:"
 AYM="AutoYADM:"
