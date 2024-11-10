@@ -4,7 +4,9 @@
 # arguments and appends them to the "tracked"
 # file, for use by autoyadm.sh
 
-YADMDIR="$HOME/.config/yadm"
+# We get the absolute path to the script's parent directory.
+AUTOYADMDIR="script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 AYE="AutoYADM Error:"
 AYM="AutoYADM:"
 
@@ -28,8 +30,8 @@ for arg in "$@"; do
     # convert to path relative to ~
     rel=${abs#"$HOME/"}
     # append to tracked file
-    echo "$HOME/$rel" >>"$YADMDIR/tracked"
-    echo "$AYM Tracking $HOME/$rel"
+    echo "$rel" >>"$AUTOYADMDIR/tracked"
+    echo "$AYM Tracking $HOME/$rel as '$rel'"
   else
     echo "$AYM Path must be inside the home directory."
     exit 1

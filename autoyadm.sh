@@ -7,6 +7,9 @@
 
 AYE="AutoYADM Error:"
 AYM="AutoYADM:"
+# We get the absolute path to the script's parent directory.
+AUTOYADMDIR="script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # We check not to overwrite the user's env setting
 if [ -z "$VAR" ]; then
   AUTOYADMPUSH=0
@@ -19,8 +22,8 @@ if [ -z "$HOST" ]; then
 fi
 
 # First we read each path from "tracked"
-(while read -r path; do
-  # we disable ignored warning for this subshell
+(while read -r relpath; do
+  path="$HOME/$relpath"
   # Execute yadm add on each real file
   # if the path points to a directory
   # This ensures symlinks are not added
@@ -34,7 +37,7 @@ fi
     echo "$AYE Target must be a directory or a file!"
     exit 1
   fi
-done) <"$HOME/.config/yadm/tracked"
+done) <"$AUTOYADMDIR/tracked"
 
 # Define the location of the ssh-agent environment
 sshenv="$HOME/.ssh/environment-$HOST"
