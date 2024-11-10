@@ -11,7 +11,7 @@ AYM="AutoYADM:"
 AUTOYADMDIR="script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # We check not to overwrite the user's env setting
-if [ -z "$VAR" ]; then
+if [ -z "$AUTOYADMPUSH" ]; then
   AUTOYADMPUSH=0
 fi
 
