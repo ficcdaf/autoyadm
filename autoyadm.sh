@@ -53,10 +53,9 @@ if [[ -n $(yadm status --porcelain) ]]; then
     # shellcheck source=/dev/null
     source "$sshenv"
     yadm push
+    echo "$AYM Push successful!"
   else
     echo "$AYE ssh-agent environment not found, aborting push..."
     exit 1
   fi
 fi
-
-echo "$AYM Push successful!"
