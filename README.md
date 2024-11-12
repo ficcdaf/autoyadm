@@ -111,10 +111,6 @@ $ systemctl enable cronie
 $ systemctl start cronie
 ```
 
-## Known Issues
-
-- When tracked files are deleted, AutoYADM does not delete them from the repository, potentially resulting in conflicts if the repository is pulled/cloned to another machine.
-
 ## Feature Roadmap
 
 - [ ] Allow custom `tracked` file location & name

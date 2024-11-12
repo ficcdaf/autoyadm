@@ -40,6 +40,12 @@ fi
   fi
 done) <"$AUTOYADMDIR/tracked"
 
+# Now we also stage files already tracked by YADM
+# that have been renamed or deleted; since the above
+# loop will not stage them:
+
+yadm add -u
+
 # Define the location of the ssh-agent environment
 sshenv="$HOME/.ssh/environment-$HOST"
 if [[ -n $(yadm status --porcelain) ]]; then
