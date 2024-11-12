@@ -11,8 +11,9 @@ AYM="AutoYADM:"
 AUTOYADMDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # We check not to overwrite the user's env setting
-if [ -z "$AUTOYADMPUSH" ]; then
+if [ -z "$AUTOYADMPUSH" ] || ((!AUTOYADMPUSH)); then
   AUTOYADMPUSH=0
+  echo "$AYM Autopush is disabled."
 fi
 
 # Set hostname explicitly because it
@@ -58,4 +59,6 @@ if [[ -n $(yadm status --porcelain) ]]; then
     echo "$AYE ssh-agent environment not found, aborting push..."
     exit 1
   fi
+else
+  echo "$AYM Nothing to commit."
 fi
