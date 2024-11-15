@@ -59,7 +59,6 @@ if [[ -n $(yadm status --porcelain) ]]; then
     # Directive to suppress shellcheck warning
     # shellcheck source=/dev/null
     source "$sshenv"
-    yadm push
     echo "$AYM Push successful!"
   else
     echo "$AYE ssh-agent environment not found, aborting push..."
@@ -68,3 +67,5 @@ if [[ -n $(yadm status --porcelain) ]]; then
 else
   echo "$AYM Nothing to commit."
 fi
+
+yadm push
