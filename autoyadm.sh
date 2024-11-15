@@ -8,13 +8,31 @@
 AYE="AutoYADM Error:"
 AYM="AutoYADM:"
 # We get the absolute path to the script's parent directory.
-AUTOYADMDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# TODO: change this to 1. optionally read from an env var, 2. default to .config/autoyadm
 
+# We check not to overwrite the user's env setting
+if [ -z "$AUTOYADMDIR" ]; then
+  AUTOYADMDIR="$HOME/.config/autoyadm"
+  echo "$AYM Using default config directory: $AUTOYADMDIR"
+fi
 # We check not to overwrite the user's env setting
 if [ -z "$AUTOYADMPUSH" ] || ((!AUTOYADMPUSH)); then
   AUTOYADMPUSH=0
   echo "$AYM Autopush is disabled."
 fi
+
+# we check if the config directory exists
+if [ ! -d "$AUTOYADMDIR" ]; then
+  echo "$AYM Specified configuration directory $AUTOYADMDIR does not exist, creating it now..."
+  if [ mkdir -p "$AUTOYADMDIR" -eq 0 ]; then
+    echo "Directory created successfully."
+  else
+    echo "Failed to create directory."
+  fi
+
+fi
+
+exit 0
 
 # Set hostname explicitly because it
 # may not be present in this shell environment
