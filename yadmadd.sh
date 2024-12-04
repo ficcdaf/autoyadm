@@ -25,7 +25,12 @@ for arg in "$@"; do
   fi
   # get its absolute path
   abs=$(realpath "$arg")
-  # check if it's inside home dir
+  # Don't allow direct homedir or config dir
+  if [[ "$abs" == "$HOME" || "$abs" == "$HOME/.config" ]]; then
+    echo "$AYM Path cannot be home directory or config directory."
+    exit 1
+  fi
+  # check if /inside/ home dir
   if [[ "$abs" == "$HOME"* ]]; then
     # convert to path relative to ~
     rel=${abs#"$HOME/"}
