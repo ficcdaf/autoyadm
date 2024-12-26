@@ -22,7 +22,7 @@ You may consider adding aliases to your shell configuration:
 alias autoyadm="/path/to/autoyadm/autoyadm.sh"
 alias yadmadd="/path/to/autoyadm/yadmadd.sh"
 # To enable automatic pushing:
-alias yadmadd="AUTOYADMPUSH=1 /path/to/autoyadm/yadmadd.sh"
+alias autoyadm="AUTOYADMPUSH=1 /path/to/autoyadm/autoyadm.sh"
 ```
 
 <details>
