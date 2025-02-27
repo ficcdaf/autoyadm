@@ -7,8 +7,21 @@
 
 AYE="AutoYADM Error:"
 AYM="AutoYADM:"
-# We get the absolute path to the script's parent directory.
-AUTOYADMDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+function get_tracked_file {
+  if [ -e "$XDG_CONFIG_HOME" ]; then
+    if [ ! -f "$XDG_CONFIG_HOME/yadm/tracked" ]; then
+      mkdir -p "$XDG_CONFIG_HOME/yadm"
+      touch "$XDG_CONFIG_HOME/yadm/tracked"
+    fi
+    echo "$XDG_CONFIG_HOME/yadm/tracked"
+  elif [ -f "$HOME/.config/yadm/tracked" ]; then
+    echo "$HOME/.config/yadm/tracked"
+  else
+    echo "$AYM Please move your tracked file to ~/.config/yadm/tracked."
+    echo "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/tracked"
+  fi
+}
 
 # We check not to overwrite the user's env setting
 if [ -z "$AUTOYADMPUSH" ] || ((!AUTOYADMPUSH)); then
@@ -38,7 +51,7 @@ fi
     echo "$AYE Target $path must be a directory or a file!"
     exit 1
   fi
-done) <"$AUTOYADMDIR/tracked"
+done) <"$(get_tracked_file)"
 
 # Now we also stage files already tracked by YADM
 # that have been renamed or deleted; since the above

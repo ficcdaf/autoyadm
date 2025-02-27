@@ -43,7 +43,7 @@ alias autoyadm="AUTOYADMPUSH=1 /path/to/autoyadm/autoyadm.sh"
 
 AutoYADM maintains a list of files and directories for automatic tracking. _**All** children of tracked directories will be tracked, including newly created, previously untracked files._ For example, if you add your Neovim configuration at `~/.config/nvim` to tracking, then any new files you create inside that folder will automatically be added and committed by AutoYADM.
 
-> _Both scripts and the `tracked` file **must** be in the same directory._
+The tracking file is stored in `~/.config/yadm/tracked`. `$XDG_CONFIG_HOME` is respected. The file will be automatically created if it doesn't already exist. You can even add it to tracking: `yadmadd ~/.config/yadm/tracked`
 
 > **Important**: Symlinks are _**not**_ added; this is to avoid conflicts with `yadm alt`
 
@@ -66,8 +66,6 @@ $ yadmadd .bashrc .zshrc .config/nvim
 ```
 
 To remove a target from tracking, simply delete it from the `tracked` file.
-
-> Note: `tracked` is in the `.gitignore` of this repository. If you want to add it to tracking, you will need to remove the `tracked` entry from `.gitignore`. Removing `.git` is not sufficient because YADM respects any `.gitignore` file it encounters.
 
 ### Committing & Pushing
 
@@ -113,7 +111,7 @@ $ systemctl start cronie
 
 ## Feature Roadmap
 
-- [ ] Allow custom `tracked` file location & name
+- [x] Allow custom `tracked` file location & name
 - [ ] Optionally allow symlinks only if they are explicitly added to tracking
 
 ## Contributing

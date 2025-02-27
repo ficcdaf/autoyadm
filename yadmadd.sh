@@ -4,8 +4,20 @@
 # arguments and appends them to the "tracked"
 # file, for use by autoyadm.sh
 
-# We get the absolute path to the script's parent directory.
-AUTOYADMDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+function get_tracked_file {
+  if [ -e "$XDG_CONFIG_HOME" ]; then
+    if [ ! -f "$XDG_CONFIG_HOME/yadm/tracked" ]; then
+      mkdir -p "$XDG_CONFIG_HOME/yadm"
+      touch "$XDG_CONFIG_HOME/yadm/tracked"
+    fi
+    echo "$XDG_CONFIG_HOME/yadm/tracked"
+  elif [ -f "$HOME/.config/yadm/tracked" ]; then
+    echo "$HOME/.config/yadm/tracked"
+  else
+    echo "$AYM Please move your tracked file to ~/.config/yadm/tracked."
+    echo "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/tracked"
+  fi
+}
 
 AYE="AutoYADM Error:"
 AYM="AutoYADM:"
@@ -35,7 +47,7 @@ for arg in "$@"; do
     # convert to path relative to ~
     rel=${abs#"$HOME/"}
     # append to tracked file
-    echo "$rel" >>"$AUTOYADMDIR/tracked"
+    echo "$rel" >>"$(get_tracked_file)"
     echo "$AYM Tracking $HOME/$rel as '$rel'"
   else
     echo "$AYM Path must be inside the home directory."
