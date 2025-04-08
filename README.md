@@ -1,5 +1,21 @@
 # AutoYADM
 
+<!--toc:start-->
+
+- [AutoYADM](#autoyadm)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Tracking](#tracking)
+    - [Ignoring Certain Files](#ignoring-certain-files)
+    - [Committing & Pushing](#committing-pushing)
+    - [Calling AutoYADM Automatically](#calling-autoyadm-automatically)
+  - [Contributing](#contributing)
+
+<!--toc:end-->
+
+> This is part of Daniel's [utility collection](https://sr.ht/~ficd/utils/).
+
 AutoYADM is a small shell utility to automate the process of managing dotfiles
 with [YADM](https://github.com/yadm-dev/yadm) by allowing the user to define a
 list of files & directories to be automatically added, committed and pushed
@@ -153,3 +169,9 @@ $ crontab -e
 $ systemctl enable cronie
 $ systemctl start cronie
 ```
+
+## Contributing
+
+Please submit patches, questions, and discussion points to the
+[~ficd/utils mailing list](https://lists.sr.ht/~ficd/utils), and consider
+visiting the [public ticket tracker](https://todo.sr.ht/~ficd/utils).
