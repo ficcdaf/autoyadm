@@ -4,6 +4,8 @@
 # from a file and executes "yadm add"
 # on all of them, then creates a timestamped
 # commit and pushes the changes.
+# Author: Daniel Fichtinger
+# License: MIT
 
 AYE="AutoYADM Error:"
 AYM="AutoYADM:"
@@ -35,6 +37,16 @@ if [ -z "$HOST" ]; then
   HOST="$(hostname)"
 fi
 
+# check if fd is installed,
+# if so we prefer that. Setting this variable
+# avoids needing to repeat the check on every
+# fd/find invocation.
+if command -v fd >/dev/null; then
+  FD="true"
+else
+  FD="false"
+fi
+
 # First we read each path from "tracked"
 (while read -r relpath; do
   path="$HOME/$relpath"
@@ -42,7 +54,12 @@ fi
   # if the path points to a directory
   # This ensures symlinks are not added
   if [ -d "$path" ]; then
-    find "$path" -type f -exec yadm add {} +
+    if [ "$FD" == "true" ]; then
+      # we prefer fd because it respects .ignore
+      fd -t f . "$path" -X yadm add
+    else
+      find "$path" -type f -exec yadm add {} +
+    fi
   # If just a file, we add directly
   elif [ -f "$path" ]; then
     yadm add "$path"
