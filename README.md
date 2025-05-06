@@ -37,7 +37,7 @@ without any problems since October 2024.
 - Configure a list of files & directories to be automatically tracked by YADM.
 - Tracked directories will also track any new files inside them!
 - Automatically add, commit, and push tracked paths.
-- `.ignore` support with `fd`.
+- `.ignore`/`.gitignore` support with `fd`.
 
 ## Installation
 
@@ -110,15 +110,16 @@ To remove a target from tracking, simply delete it from the `tracked` file.
 
 It's possible to ignore certain patterns inside a folder you're otherwise
 tracking with `yadmadd`. For example, suppose you've added `.config/foo`, but
-you want to specifically ignore `.config/foo/bar.log`. You can use a `.ignore`
-file for this:
+you want to specifically ignore `.config/foo/bar.log`. You can use a
+`.ignore`/`.gitignore` file for this:
 
 ```sh
 echo "bar.log" > ~/.config/foo/.ignore
 ```
 
-The `.ignore` file must be in the root of the directory you've added with
-`yadmadd`. You also need `fd` available on your `$PATH` for ignoring to work.
+The `.ignore`/`.gitignore` file must be in the root of the directory you've
+added with `yadmadd`. You also need `fd` available on your `$PATH` for ignoring
+to work.
 
 ### Committing & Pushing
 
