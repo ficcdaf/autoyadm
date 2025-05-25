@@ -56,7 +56,7 @@ fi
   if [ -d "$path" ]; then
     if [ "$FD" == "true" ]; then
       # we prefer fd because it respects .ignore and .gitignore
-      fd --no-require-git -t f . "$path" -X yadm add
+      fd --no-require-git --hidden -t f . "$path" -X yadm add
     else
       find "$path" -type f -exec yadm add {} +
     fi
